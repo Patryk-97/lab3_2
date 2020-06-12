@@ -1,6 +1,7 @@
 package edu.iis.mto.time;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import org.joda.time.Duration;
@@ -65,5 +66,16 @@ public class OrderTest {
                                    .thenReturn(laterTime);
         order.submit();
         assertDoesNotThrow(order::confirm);
+    }
+
+    @Test
+    public void callConfirm25HoursAfterSubmitTest() {
+        Instant actualTime = Instant.now();
+        Instant laterTime = Instant.now()
+                                   .plus(Duration.standardHours(25));
+        when(clock.getActualTime()).thenReturn(actualTime)
+                                   .thenReturn(laterTime);
+        order.submit();
+        assertThrows(OrderExpiredException.class, order::confirm);
     }
 }
