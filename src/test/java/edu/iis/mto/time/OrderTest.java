@@ -30,7 +30,7 @@ public class OrderTest {
 
     @Test
     public void callConfirmJustAfterSubmitTest() {
-        Instant laterTime = actualTime;
+        laterTime = actualTime;
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -39,7 +39,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm1SecondAfterSubmitTest() {
-        Instant laterTime = actualTime.plus(Duration.standardSeconds(1));
+        laterTime = actualTime.plus(Duration.standardSeconds(1));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -48,7 +48,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm12HoursAfterSubmitTest() {
-        Instant laterTime = actualTime.plus(Duration.standardHours(12));
+        laterTime = actualTime.plus(Duration.standardHours(12));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -57,7 +57,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm24HoursAfterSubmitTest() {
-        Instant laterTime = actualTime.plus(Duration.standardHours(24));
+        laterTime = actualTime.plus(Duration.standardHours(24));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -66,7 +66,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm25HoursAfterSubmitTest() {
-        Instant laterTime = actualTime.plus(Duration.standardHours(25));
+        laterTime = actualTime.plus(Duration.standardHours(25));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
