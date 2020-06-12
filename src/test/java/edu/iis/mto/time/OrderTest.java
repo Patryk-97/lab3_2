@@ -44,4 +44,15 @@ public class OrderTest {
         order.submit();
         assertDoesNotThrow(order::confirm);
     }
+
+    @Test
+    public void callConfirm12HoursAfterSubmitTest() {
+        Instant actualTime = Instant.now();
+        Instant laterTime = Instant.now()
+                                   .plus(Duration.standardHours(12));
+        when(clock.getActualTime()).thenReturn(actualTime)
+                                   .thenReturn(laterTime);
+        order.submit();
+        assertDoesNotThrow(order::confirm);
+    }
 }
