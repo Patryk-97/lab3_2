@@ -16,6 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class OrderTest {
 
     private Order order;
+    private Instant actualTime;
+    private Instant laterTime;
 
     @Mock
     private IClock clock;
@@ -23,12 +25,12 @@ public class OrderTest {
     @BeforeEach
     public void setUp() {
         order = new Order(clock);
+        actualTime = Instant.now();
     }
 
     @Test
     public void callConfirmJustAfterSubmitTest() {
-        Instant actualTime = Instant.now();
-        Instant laterTime = Instant.now();
+        Instant laterTime = actualTime;
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -37,9 +39,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm1SecondAfterSubmitTest() {
-        Instant actualTime = Instant.now();
-        Instant laterTime = Instant.now()
-                                   .plus(Duration.standardSeconds(1));
+        Instant laterTime = actualTime.plus(Duration.standardSeconds(1));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -48,9 +48,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm12HoursAfterSubmitTest() {
-        Instant actualTime = Instant.now();
-        Instant laterTime = Instant.now()
-                                   .plus(Duration.standardHours(12));
+        Instant laterTime = actualTime.plus(Duration.standardHours(12));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -59,9 +57,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm24HoursAfterSubmitTest() {
-        Instant actualTime = Instant.now();
-        Instant laterTime = Instant.now()
-                                   .plus(Duration.standardHours(24));
+        Instant laterTime = actualTime.plus(Duration.standardHours(24));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
@@ -70,9 +66,7 @@ public class OrderTest {
 
     @Test
     public void callConfirm25HoursAfterSubmitTest() {
-        Instant actualTime = Instant.now();
-        Instant laterTime = Instant.now()
-                                   .plus(Duration.standardHours(25));
+        Instant laterTime = actualTime.plus(Duration.standardHours(25));
         when(clock.getActualTime()).thenReturn(actualTime)
                                    .thenReturn(laterTime);
         order.submit();
